@@ -1,0 +1,70 @@
+
+<div class="page-content-contact">
+  <div class="container">
+    <div class="row">
+      
+      {% if section.settings.text_alternate01 != blank %}
+      <h2 class="col-xs-6 text-center special-h2">
+        {{ section.settings.text_alternate01 }}
+      </h2>
+      {% endif %}
+
+      {% for block in section.blocks %}  
+        <div class="col-xs-12">  
+          <li>{{ block.settings.content }}</li>
+      </div>
+      {% endfor %}
+      
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        {% if page.content.size > 0 %}
+        	{{ page.content }}
+        {% endif %} 
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Alternate01 page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Settings page"
+      },
+      {
+        "type": "textarea",
+        "id": "text_alternate01",
+        "label": "Text Alternate01",
+		"default": "Your text goes here."
+	  }
+    ],
+ 	"blocks": [
+      {
+        "type": "quote",
+        "name": "FAQ",
+        "settings": [
+          {
+            "id": "content",
+            "type": "textarea",
+            "label": "Content"
+          },
+          {
+            "id": "content-title",
+            "type": "text",
+            "label": "Content Title"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

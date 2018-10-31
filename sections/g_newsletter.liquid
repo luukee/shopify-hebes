@@ -1,0 +1,174 @@
+{%- case section.settings.left_css_animations -%}
+{% when '1' %}
+{%- assign css_animations_class_left = '' -%}
+{% when '2' %}
+{%- assign css_animations_class_left = 'wow fadeIn' -%}
+{% when '3' %}
+{%- assign css_animations_class_left = 'wow fadeInDown' -%}
+{% when '4' %}
+{%- assign css_animations_class_left = 'wow fadeInDownBig' -%}
+{% when '5' %}
+{%- assign css_animations_class_left = 'wow fadeInLeft' -%}
+{% when '6' %}
+{%- assign css_animations_class_left = 'wow fadeInLeftBig' -%}
+{% when '7' %}
+{%- assign css_animations_class_left = 'wow fadeInRight' -%}
+{% when '8' %}
+{%- assign css_animations_class_left = 'wow fadeInRightBig' -%}
+{% when '9' %}
+{%- assign css_animations_class_left = 'wow fadeInUp' -%}
+{% when '10' %}
+{%- assign css_animations_class_left = 'wow fadeInDown' -%}
+{% when '11' %}
+{%- assign css_animations_class_left = 'wow fadeInUpBig' -%}
+{%- endcase -%}
+
+{%- case section.settings.right_css_animations -%}
+{% when '1' %}
+{%- assign css_animations_class_right = '' -%}
+{% when '2' %}
+{%- assign css_animations_class_right = 'wow fadeIn' -%}
+{% when '3' %}
+{%- assign css_animations_class_right = 'wow fadeInDown' -%}
+{% when '4' %}
+{%- assign css_animations_class_right = 'wow fadeInDownBig' -%}
+{% when '5' %}
+{%- assign css_animations_class_right = 'wow fadeInLeft' -%}
+{% when '6' %}
+{%- assign css_animations_class_right = 'wow fadeInLeftBig' -%}
+{% when '7' %}
+{%- assign css_animations_class_right = 'wow fadeInRight' -%}
+{% when '8' %}
+{%- assign css_animations_class_right = 'wow fadeInRightBig' -%}
+{% when '9' %}
+{%- assign css_animations_class_right = 'wow fadeInUp' -%}
+{% when '10' %}
+{%- assign css_animations_class_right = 'wow fadeInDown' -%}
+{% when '11' %}
+{%- assign css_animations_class_right = 'wow fadeInUpBig' -%}
+{%- endcase -%}
+
+<div class="g--newsletter wow fadeIn" {% if section.settings.margin != blank %}style="margin: {{ section.settings.margin }};"{% endif %}>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-12 {{ css_animations_class_left }}">
+        <div class="globo-heading">
+          {% if section.settings.title != blank %}
+          <h2>{{ section.settings.title }}</h2>
+          {% endif %}	
+          {% if section.settings.subtitle != blank %}
+          <p><strong>{{ section.settings.subtitle }}</strong></p>
+          {% endif %}  	
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12 {{ css_animations_class_right }}">
+        <div id="globo-mailchimp-container" class="globo-mailchimp-container">
+          {% if section.settings.text_form != blank %}
+          <div class="newsletter-bg-text-form">{{ section.settings.text_form }}</div>
+          {% endif %}
+          {% form 'customer',  class:'globo-easy-mc-form' %}
+          {{ form.errors | default_errors }}
+          {% if form.posted_successfully? %}
+          <p class="form--success">{{ 'general.newsletter_form.confirmation' | t }}</p>
+          {% else %}
+          <div class="input-group password__input-group">
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input type="email"
+                   name="contact[email]"
+                   id="Email"
+                   class="globo-easy-mc-email field-no-label"
+                   value="{% if customer %}{{ customer.email }}{% endif %}"
+                   placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
+                   autocorrect="off"
+                   autocapitalize="off">
+            <span class="input-group__btn">
+              <button type="submit" class="globo-easy-mc-submit-button btn btn-primary" name="commit" id="Subscribe">
+                <span>{{ 'general.newsletter_form.submit' | t }}</span><i class="icon dl-icon-right" aria-hidden="true"></i>
+              </button>
+            </span>
+          </div>
+          {% endif %}
+          {% endform %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Newsletter default",
+    "class": "globo_newsletter_default",
+    "settings": [
+      {
+        "type": "select",
+        "id": "left_css_animations",
+        "label": "Left CSS Animation",
+        "options": [
+          { "value": "1", "label": "None" },
+          { "value": "2", "label": "fadeIn" },
+          { "value": "3", "label": "fadeInDown" },
+          { "value": "4", "label": "fadeInDownBig" },
+          { "value": "5", "label": "fadeInLeft" },
+          { "value": "6", "label": "fadeInLeftBig" },
+          { "value": "7", "label": "fadeInRight" },
+          { "value": "8", "label": "fadeInRightBig" },
+          { "value": "9", "label": "fadeInUp" },
+          { "value": "10", "label": "fadeInDown" },
+          { "value": "11", "label": "fadeInUpBig" }
+        ],
+        "default": "5"
+      },
+      {
+        "type": "select",
+        "id": "right_css_animations",
+        "label": "Right CSS Animation",
+        "options": [
+          { "value": "1", "label": "None" },
+          { "value": "2", "label": "fadeIn" },
+          { "value": "3", "label": "fadeInDown" },
+          { "value": "4", "label": "fadeInDownBig" },
+          { "value": "5", "label": "fadeInLeft" },
+          { "value": "6", "label": "fadeInLeftBig" },
+          { "value": "7", "label": "fadeInRight" },
+          { "value": "8", "label": "fadeInRightBig" },
+          { "value": "9", "label": "fadeInUp" },
+          { "value": "10", "label": "fadeInDown" },
+          { "value": "11", "label": "fadeInUpBig" }
+        ],
+        "default": "7"
+      },
+      {
+        "type": "text",
+        "id": "margin",
+        "label": "Margin: (top-right-bottom-left)",
+        "info": "Ex: 10px 0 30px 0"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+		"default": "Get Discount <span>30%<\/span> Off"
+      },
+      {
+        "type": "textarea",
+        "id": "subtitle",
+        "label": "Subtitle",
+		"default": "Sign up to our newsletter and save 30% for you next purchase.<br>No spam, we promise !"
+      },
+      {
+        "type": "textarea",
+        "id": "text_form",
+        "label": "Text form",
+		"default": "Increase more than 300% of email subscribers"
+      },
+      {
+        "type": "paragraph",
+        "content": "Any customers who sign up will have an account created for them in Shopify. [View customers](/admin/customers?query=&accepts_marketing=1)"
+      }
+    ],
+    "presets": [{
+      "name": "Newsletter",
+      "category": "Promotional"
+    }]
+  }
+{% endschema %}

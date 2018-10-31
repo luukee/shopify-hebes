@@ -1,0 +1,2143 @@
+{%- case section.settings.use_width -%}
+    {% when '1' %}
+      	{%- assign width_slideshow = 'g-fullwwidth' -%}
+    {% when '2' %}
+    	{%- assign width_slideshow = 'container-full' -%}
+    {% when '3' %}
+    	{%- assign width_slideshow = 'container' -%}
+{%- endcase -%}
+
+{%- case section.settings.nav_style -%}
+    {% when '1' %}
+      	{%- assign nav_class = 'g-nav_style_1' -%}
+    {% when '2' %}
+    	{%- assign nav_class = 'g-nav_style_2' -%}
+    {% when '3' %}
+    	{%- assign nav_class = 'g-nav_style_3' -%}
+    {% when '4' %}
+    	{%- assign nav_class = 'g-nav_style_2 g-nav_style_4' -%}
+    {% when '5' %}
+    	{%- assign nav_class = 'g-nav_style_5' -%}
+{%- endcase -%}
+
+{%- case section.settings.nav_image_style_position -%}
+    {% when '1' %}
+      	{%- assign nav_image_class = 'g-nav_image_style_1' -%}
+    {% when '2' %}
+    	{%- assign nav_image_class = 'g-nav_image_style_2' -%}
+    {% when '3' %}
+    	{%- assign nav_image_class = 'g-nav_image_style_3' -%}
+{%- endcase -%}
+
+
+{%- case section.settings.use_dots_style -%}
+    {% when '1' %}
+      	{%- assign dots_style = 'slider-dots-1' -%}
+    {% when '2' %}
+    	{%- assign dots_style = 'slider-dots-2 slideshow-dots-number' -%}
+    {% when '3' %}
+    	{%- assign dots_style = 'slider-dots-3 slideshow-dots-number' -%}
+    {% when '4' %}
+    	{%- assign dots_style = 'slider-dots-4 slideshow-dots-number' -%}
+    {% when '5' %}
+      	{%- assign dots_style = 'slider-dots-5' -%}
+{%- endcase -%}
+
+{%- case section.settings.thumbs_style_position -%}
+    {% when '1' %}
+      	{%- assign thumbs_class = 'g-thumb_style_1' -%}
+    {% when '2' %}
+    	{%- assign thumbs_class = 'g-thumb_style_2' -%}
+    {% when '3' %}
+    	{%- assign thumbs_class = 'g-thumb_style_3' -%}
+    {% when '4' %}
+    	{%- assign thumbs_class = 'g-thumb_style_2 g-thumb_style_4' -%}
+    {% when '5' %}
+    	{%- assign thumbs_class = 'g-thumb_style_2 g-thumb_style_5' -%}
+{%- endcase -%}
+
+{%- case section.settings.number_total_position -%}
+    {% when '1' %}
+      	{%- assign number_total_class = 'g-number-total-p-1' -%}
+    {% when '2' %}
+    	{%- assign number_total_class = 'g-number-total-p-2' -%}
+    {% when '3' %}
+    	{%- assign number_total_class = 'g-number-total-p-3' -%}
+    {% when '4' %}
+    	{%- assign number_total_class = 'g-number-total-p-4' -%}
+    {% when '5' %}
+    	{%- assign number_total_class = 'g-number-total-p-5' -%}
+{%- endcase -%}
+
+{%- case section.settings.social_position -%}
+    {% when '1' %}
+      	{%- assign social_class = 'g-social-position_1' -%}
+    {% when '2' %}
+    	{%- assign social_class = 'g-social-position_2' -%}
+    {% when '3' %}
+    	{%- assign social_class = 'g-social-position_3' -%}
+    {% when '4' %}
+    	{%- assign social_class = 'g-social-position_4' -%}
+{%- endcase -%}
+
+<div class="g-slideshow-homepage {{ nav_class }} {{ dots_style }} {{ nav_image_class }} {% if section.settings.use_full_screen %}full-screen-slideshow{% endif %} clearfix" {% if section.settings.margin != blank %}style="margin: {{ section.settings.margin }};"{% endif %}>
+  <div class="{{ width_slideshow }}">
+    <div class="g-relative {% if section.settings.show_right_list_catalog %}slider-left{% endif %}">
+      {% if section.settings.use_number_total %}
+      <div class="number-total {{ number_total_class }}"></div>
+      {% endif %}
+      <div class="data-slideshow" {% if section.settings.autoplay %}data-auto="{{ section.settings.autoplay_speed }}"{% endif %} data-paging="{% if section.settings.use_dots_slideshow %}true{% else %}false{% endif %}" data-nav="{% if section.settings.use_nav_slideshow %}true{% else %}false{% endif %}" data-transition="{{ section.settings.transition }}" data-prev='<i class="fa fa-chevron-left" aria-hidden="true"></i>' data-next='<i class="fa fa-chevron-right" aria-hidden="true"></i>' style="display: none;"></div>
+      <div id="slideshow-section-{{ section.id }}" class="g-slideshow owl-carousel" data-slider-id="{{ section.id }}">
+        {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+
+        {% if block.type == 'image' %}
+        {% if block.settings.image == blank %}
+        <div class="item">
+          {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+          {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          <div class="content_slideshow">
+            <div class="container">
+              <div class="g-content-slider">
+                {% if block.settings.title != blank %}
+                <h5 class="title-border-top" style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }}; letter-spacing: 0.5em; line-height: 1.3; margin: 0; text-transform: uppercase;">{{ block.settings.title }}</h5>
+                {% endif %}
+                <div class="content-below-bottom">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      {% if block.settings.topheading != blank %}
+                      <h4 style="margin: 0; text-transform: uppercase; font-size: {{ block.settings.topheading_font_size }}px; letter-spacing: 0.5em; color: {{ block.settings.topheading_color }};">{{ block.settings.topheading }}</h4>
+                      {% endif %}
+                      {% if block.settings.heading != blank %}
+                      <h2 style="font-size: {{ block.settings.heading_font_size }}px; text-transform: uppercase; color: {{ block.settings.heading_color }}; margin: 0 0 15px 0;">{{ block.settings.heading }}</h2>
+                      {% endif %}
+                      {% if block.settings.button_name != blank %}
+                      <a href="{{ block.settings.button_link }}" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }};">{{ block.settings.button_name }}</a>
+                      {% endif %}
+                    </div>
+                    {% if block.settings.text_1 != blank %}
+                    <div class="col-md-2 col-sm-3 col-xs-12">
+                      <p class="p-slider-1" style="color: {{ block.settings.text_1_color }};">{{ block.settings.text_1 }}</p>
+                    </div>
+                    {% endif %}
+                    {% if block.settings.text_2 != blank %}
+                    <div class="col-md-2 col-sm-3 col-xs-12">
+                      <p class="p-slider-1" style="color: {{ block.settings.text_2_color }};">{{ block.settings.text_2 }}</p>
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% if block.settings.text_right_center != blank %}
+          <div class="heading-catalog" style="font-size: {{ block.settings.text_right_center_font_size }}px; color: {{ block.settings.text_right_center_color }}; line-height: 1;">{{ block.settings.text_right_center }} <i class="fa fa-sort" aria-hidden="true"></i></div>
+          {% endif %}
+        </div>
+        {% else %}
+        <div class="item" data-navipicture="{{ block.settings.image | img_url: '260x160' }}" style="background: url('{{ block.settings.image | img_url: 'master' }}') center center no-repeat;background-size: cover; min-height: {{ section.settings.height_slider }}px">
+          <div class="content_slideshow">
+            <div class="container">
+              <div class="g-content-slider">
+                {% if block.settings.title != blank %}
+                <h5 class="title-border-top" style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }}; letter-spacing: 0.5em; line-height: 1.3; margin: 0; text-transform: uppercase;">{{ block.settings.title }}</h5>
+                {% endif %}
+                <div class="content-below-bottom">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      {% if block.settings.topheading != blank %}
+                      <h4 style="margin: 0; text-transform: uppercase; font-size: {{ block.settings.topheading_font_size }}px; letter-spacing: 0.5em; color: {{ block.settings.topheading_color }};">{{ block.settings.topheading }}</h4>
+                      {% endif %}
+                      {% if block.settings.heading != blank %}
+                      <h2 style="font-size: {{ block.settings.heading_font_size }}px; text-transform: uppercase; color: {{ block.settings.heading_color }}; margin: 0 0 15px 0;">{{ block.settings.heading }}</h2>
+                      {% endif %}
+                      {% if block.settings.button_name != blank %}
+                      <a href="{{ block.settings.button_link }}" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }};">{{ block.settings.button_name }}</a>
+                      {% endif %}
+                    </div>
+                    {% if block.settings.text_1 != blank %}
+                    <div class="col-md-2 col-sm-3 col-xs-12">
+                      <p class="p-slider-1" style="color: {{ block.settings.text_1_color }};">{{ block.settings.text_1 }}</p>
+                    </div>
+                    {% endif %}
+                    {% if block.settings.text_2 != blank %}
+                    <div class="col-md-2 col-sm-3 col-xs-12">
+                      <p class="p-slider-1" style="color: {{ block.settings.text_2_color }};">{{ block.settings.text_2 }}</p>
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% if block.settings.text_left_center != blank %}
+          <div class="heading-catalog" style="font-size: {{ block.settings.text_left_center_font_size }}px; color: {{ block.settings.text_left_center_color }}; line-height: 1;">{{ block.settings.text_left_center }} <i class="fa fa-sort" aria-hidden="true"></i></div>
+          {% endif %}
+        </div>
+        {% endif %}
+        {% endif %}
+
+        {% if block.type == 'image2' %}
+        {% if block.settings.image == blank %}
+        <div class="item">
+          {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+          {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          <div class="content_slideshow">
+            <div class="container text-left">
+              <div class="g-content-slider">
+                <div class="content-slider-2">
+                  {% if block.settings.heading != blank %}
+                  <h2 style="font-size: {{ block.settings.heading_font_size }}px; color: {{ block.settings.heading_color }};">{{ block.settings.heading }}</h2>
+                  {% endif %}
+                  <ul class="clearfix">
+                    {% if block.settings.text_1 != blank %}
+                    <li><p class="p-slider-1" style="color: {{ block.settings.text_1_color }};">{{ block.settings.text_1 }}</p></li>
+                    {% endif %}
+                    {% if block.settings.text_2 != blank %}
+                    <li><p class="p-slider-1" style="color: {{ block.settings.text_2_color }};">{{ block.settings.text_2 }}</p></li>
+                    {% endif %}
+                  </ul>
+                  {% if block.settings.button_name != blank %}
+                  <a href="{{ block.settings.button_link }}" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }};">{{ block.settings.button_name }}</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% if block.settings.title != blank %}
+          <h5 class="text-trending" style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }};">{{ block.settings.title }}</h5>
+          {% endif %}
+          {% if block.settings.text_left_center != blank %}
+          <div class="heading-catalog heading-catalog-left" style="font-size: {{ block.settings.text_left_center_font_size }}px; color: {{ block.settings.text_left_center_color }}; line-height: 1;">{{ block.settings.text_left_center }} <i class="fa fa-sort" aria-hidden="true"></i></div>
+          {% endif %}
+        </div>
+        {% else %}
+        <div class="item" data-navipicture="{{ block.settings.image | img_url: '260x160' }}" style="background: url('{{ block.settings.image | img_url: 'master' }}') center center no-repeat;background-size: cover; min-height: {{ section.settings.height_slider }}px">
+          <div class="content_slideshow">
+            <div class="container text-left">
+              <div class="g-content-slider">
+                <div class="content-slider-2">
+                  {% if block.settings.heading != blank %}
+                  <h2 style="font-size: {{ block.settings.heading_font_size }}px; color: {{ block.settings.heading_color }};">{{ block.settings.heading }}</h2>
+                  {% endif %}
+                  <ul class="clearfix">
+                    {% if block.settings.text_1 != blank %}
+                    <li><p class="p-slider-1" style="color: {{ block.settings.text_1_color }};">{{ block.settings.text_1 }}</p></li>
+                    {% endif %}
+                    {% if block.settings.text_2 != blank %}
+                    <li><p class="p-slider-1" style="color: {{ block.settings.text_2_color }};">{{ block.settings.text_2 }}</p></li>
+                    {% endif %}
+                  </ul>
+                  {% if block.settings.button_name != blank %}
+                  <a href="{{ block.settings.button_link }}" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }};">{{ block.settings.button_name }}</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% if block.settings.title != blank %}
+          <h5 class="text-trending" style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }};">{{ block.settings.title }}</h5>
+          {% endif %}
+          {% if block.settings.text_left_center != blank %}
+          <div class="heading-catalog heading-catalog-left" style="font-size: {{ block.settings.text_left_center_font_size }}px; color: {{ block.settings.text_left_center_color }}; line-height: 1;">{{ block.settings.text_left_center }} <i class="fa fa-sort" aria-hidden="true"></i></div>
+          {% endif %}
+        </div>
+        {% endif %}
+        {% endif %}
+        
+        {% if block.type == 'image3' %}
+        {% if block.settings.image == blank %}
+        <div class="item">
+          {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+          {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          <div class="content_slideshow">
+            <div class="container">
+              <div class="g-content-slider">
+                <div class="row">
+                  <div class="col-md-7 col-sm-7 col-xs-12">
+                    {% if block.settings.heading != blank %}
+                    	<h2 style="font-size: {{ block.settings.heading_font_size }}px; color: {{ block.settings.heading_color }}; line-height: 1; margin: 0 0 30px 0;">{{ block.settings.heading }}</h2>
+                    {% endif %}
+                    {% if block.settings.button_name != blank %}
+                    	<a href="{{ block.settings.button_link }}" class="btn-slider-2" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }};">{{ block.settings.button_name }}</a>
+                    {% endif %}
+                  </div>
+                  <div class="col-md-4 col-md-offset-1 col-sm-5 col-xs-12">
+                    <div class="row">
+                      {% if block.settings.text_1 != blank %}
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <p class="p-slider-1" style="color: {{ block.settings.text_1_color }};">{{ block.settings.text_1 }}</p>
+                      </div>
+                      {% endif %}
+                      {% if block.settings.text_2 != blank %}
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <p class="p-slider-1" style="color: {{ block.settings.text_2_color }};">{{ block.settings.text_2 }}</p>
+                      </div>
+                      {% endif %}          
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% if block.settings.text_right_center != blank %}
+          <div class="heading-catalog" style="font-size: {{ block.settings.text_right_center_font_size }}px; color: {{ block.settings.text_right_center_color }}; line-height: 1;">{{ block.settings.text_right_center }} <i class="fa fa-sort" aria-hidden="true"></i></div>
+          {% endif %}
+        </div>
+        {% else %}
+        <div class="item" data-navipicture="{{ block.settings.image | img_url: '260x160' }}" style="background: url('{{ block.settings.image | img_url: 'master' }}') center center no-repeat;background-size: cover; min-height: {{ section.settings.height_slider }}px">
+          <div class="content_slideshow">
+            <div class="container">
+              <div class="g-content-slider">
+                <div class="row">
+                  <div class="col-md-7 col-sm-7 col-xs-12">
+                    {% if block.settings.heading != blank %}
+                    	<h2 style="font-size: {{ block.settings.heading_font_size }}px; color: {{ block.settings.heading_color }}; line-height: 1; margin: 0 0 30px 0;">{{ block.settings.heading }}</h2>
+                    {% endif %}
+                    {% if block.settings.button_name != blank %}
+                    	<a href="{{ block.settings.button_link }}" class="btn-slider-2" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }};">{{ block.settings.button_name }}</a>
+                    {% endif %}
+                  </div>
+                  <div class="col-md-4 col-md-offset-1 col-sm-5 col-xs-12">
+                    <div class="row">
+                      {% if block.settings.text_1 != blank %}
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <p class="p-slider-1" style="color: {{ block.settings.text_1_color }};">{{ block.settings.text_1 }}</p>
+                      </div>
+                      {% endif %}
+                      {% if block.settings.text_2 != blank %}
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <p class="p-slider-1" style="color: {{ block.settings.text_2_color }};">{{ block.settings.text_2 }}</p>
+                      </div>
+                      {% endif %}          
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% if block.settings.text_right_center != blank %}
+          <div class="heading-catalog" style="font-size: {{ block.settings.text_right_center_font_size }}px; color: {{ block.settings.text_right_center_color }}; line-height: 1;">{{ block.settings.text_right_center }} <i class="fa fa-sort" aria-hidden="true"></i></div>
+          {% endif %}
+        </div>
+        {% endif %}
+        {% endif %}
+        
+        {% if block.type == 'image4' %}
+        {% if block.settings.image == blank %}
+        <div class="item">
+          {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+          {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          <div class="content_slideshow">
+            <div class="container">
+              <div class="g-content-slider">
+                {% if block.settings.title != blank %}
+                <h5 class="title-border-top title-border-bold" style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }}; letter-spacing: 0.5em; line-height: 1.3; margin: 0; text-transform: uppercase;">{{ block.settings.title }}</h5>
+                {% endif %}
+                {% if block.settings.heading != blank %}
+                <h2 style="font-size: {{ block.settings.heading_font_size }}px; color: {{ block.settings.heading_color }}; margin: 100px 0 30px 0;">{{ block.settings.heading }}</h2>
+                {% endif %}
+                <div class="row">
+                  {% if block.settings.text_1 != blank %}
+                  <div class="col-md-2 col-sm-4 col-xs-12">
+                    <p class="p-slider-1 color-strong" style="color: {{ block.settings.text_1_color }}; margin: 0;">{{ block.settings.text_1 }}</p>
+                  </div>
+                  {% endif %}
+                  {% if block.settings.text_2 != blank %}
+                  <div class="col-md-2 col-sm-4 col-xs-12">
+                    <p class="p-slider-1 color-strong" style="color: {{ block.settings.text_2_color }}; margin: 0;">{{ block.settings.text_2 }}</p>
+                  </div>
+                  {% endif %}
+                </div>
+                {% if block.settings.button_name != blank %}
+                <a href="{{ block.settings.button_link }}" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }}; margin-top: 35px; display: inline-block;">{{ block.settings.button_name }}</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% if block.settings.text_left_center != blank %}
+          <div class="heading-catalog heading-catalog-left-bottom" style="font-size: {{ block.settings.text_left_center_font_size }}px; color: {{ block.settings.text_right_center_color }}; line-height: 1;">{{ block.settings.text_left_center }} <i class="fa fa-sort" aria-hidden="true"></i></div>
+          {% endif %}
+        </div>
+        {% else %}
+        <div class="item" data-navipicture="{{ block.settings.image | img_url: '260x160' }}" style="background: url('{{ block.settings.image | img_url: 'master' }}') center center no-repeat;background-size: cover; min-height: {{ section.settings.height_slider }}px">
+          <div class="content_slideshow">
+            <div class="container">
+              <div class="g-content-slider">
+                {% if block.settings.title != blank %}
+                <h5 class="title-border-top title-border-bold" style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }}; letter-spacing: 0.5em; line-height: 1.3; margin: 0; text-transform: uppercase;">{{ block.settings.title }}</h5>
+                {% endif %}
+                {% if block.settings.heading != blank %}
+                <h2 style="font-size: {{ block.settings.heading_font_size }}px; color: {{ block.settings.heading_color }}; margin: 100px 0 30px 0;">{{ block.settings.heading }}</h2>
+                {% endif %}
+                <div class="row">
+                  {% if block.settings.text_1 != blank %}
+                  <div class="col-md-2 col-sm-4 col-xs-12">
+                    <p class="p-slider-1 color-strong" style="color: {{ block.settings.text_1_color }}; margin: 0;">{{ block.settings.text_1 }}</p>
+                  </div>
+                  {% endif %}
+                  {% if block.settings.text_2 != blank %}
+                  <div class="col-md-2 col-sm-4 col-xs-12">
+                    <p class="p-slider-1 color-strong" style="color: {{ block.settings.text_2_color }}; margin: 0;">{{ block.settings.text_2 }}</p>
+                  </div>
+                  {% endif %}
+                </div>
+                {% if block.settings.button_name != blank %}
+                <a href="{{ block.settings.button_link }}" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }}; margin-top: 35px; display: inline-block;">{{ block.settings.button_name }}</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% if block.settings.text_left_center != blank %}
+          <div class="heading-catalog heading-catalog-left-bottom" style="font-size: {{ block.settings.text_left_center_font_size }}px; color: {{ block.settings.text_right_center_color }}; line-height: 1;">{{ block.settings.text_left_center }} <i class="fa fa-sort" aria-hidden="true"></i></div>
+          {% endif %}
+        </div>
+        {% endif %}
+        {% endif %}
+        
+        {% if block.type == 'image5' %}
+        {% if block.settings.image == blank %}
+        <div class="item">
+          {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+          {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          <div class="content_slideshow">
+            <div class="container">
+              <div class="g-content-slider">
+                <div class="row">
+                  <div class="col-md-7 col-sm-7 col-xs-12 pull-right">
+                    {% if block.settings.title != blank %}
+                    <h4 style="margin: 0 0 8px 0; text-transform: uppercase; font-size: {{ block.settings.title_font_size }}px; letter-spacing: 0.5em; color: {{ block.settings.title_color }};">{{ block.settings.title }}</h4>
+                    {% endif %}
+                    {% if block.settings.heading != blank %}
+                    <h2 style="font-size: {{ block.settings.heading_font_size }}px; color: {{ block.settings.heading_color }}; line-height: 1; margin: 0 0 30px 0;">{{ block.settings.heading }}</h2>
+                    {% endif %}
+                    {% if block.settings.button_name != blank %}
+                    <a href="{{ block.settings.button_link }}" class="btn-slider-2 btn-forloop-{{ forloop.index }}" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }};">{{ block.settings.button_name }}</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <style>
+            .g-content-slider .btn-slider-2.btn-forloop-{{ forloop.index }}:before {
+              background-color: {{ block.settings.button_bg_color }};
+            }
+          </style>
+        </div>
+        {% else %}
+        <div class="item" data-navipicture="{{ block.settings.image | img_url: '260x160' }}" style="background: url('{{ block.settings.image | img_url: 'master' }}') center center no-repeat;background-size: cover; min-height: {{ section.settings.height_slider }}px">
+          <div class="content_slideshow">
+            <div class="container">
+              <div class="g-content-slider">
+                <div class="row">
+                  <div class="col-md-7 col-sm-7 col-xs-12 pull-right">
+                    {% if block.settings.title != blank %}
+                    <h4 style="margin: 0 0 8px 0; text-transform: uppercase; font-size: {{ block.settings.title_font_size }}px; letter-spacing: 0.5em; color: {{ block.settings.title_color }};">{{ block.settings.title }}</h4>
+                    {% endif %}
+                    {% if block.settings.heading != blank %}
+                    <h2 style="font-size: {{ block.settings.heading_font_size }}px; color: {{ block.settings.heading_color }}; line-height: 1; margin: 0 0 30px 0;">{{ block.settings.heading }}</h2>
+                    {% endif %}
+                    {% if block.settings.button_name != blank %}
+                    <a href="{{ block.settings.button_link }}" class="btn-slider-2 btn-forloop-{{ forloop.index }}" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }};">{{ block.settings.button_name }}</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <style>
+            .g-content-slider .btn-slider-2.btn-forloop-{{ forloop.index }}:before {
+              background-color: {{ block.settings.button_bg_color }};
+            }
+          </style>
+        </div>
+        {% endif %}
+        {% endif %}
+        
+        {% if block.type == 'image6' %}
+        {% if block.settings.image == blank %}
+        <div class="item">
+          {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+          {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          <div class="content_slideshow">
+            <div class="container">
+              <div class="g-content-slider">
+                <div class="row">
+                  <div class="col-md-6 col-sm-6 col-xs-12 pull-right">
+                    {% if block.settings.title != blank %}
+                    <h2 style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }}; line-height: 1; margin: 0 0 30px 0;">{{ block.settings.title }}</h2>
+                    {% endif %}
+                    {% if block.settings.button_name != blank %}
+                    <a href="{{ block.settings.button_link }}" class="btn-slider-2 btn-slider-3" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }};">{{ block.settings.button_name }}</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="item" data-navipicture="{{ block.settings.image | img_url: '260x160' }}" style="background: url('{{ block.settings.image | img_url: 'master' }}') center center no-repeat;background-size: cover; min-height: {{ section.settings.height_slider }}px">
+          <div class="content_slideshow">
+            <div class="container">
+              <div class="g-content-slider">
+                <div class="row">
+                  <div class="col-md-6 col-sm-6 col-xs-12 pull-right">
+                    {% if block.settings.title != blank %}
+                    <h2 style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }}; line-height: 1; margin: 0 0 30px 0;">{{ block.settings.title }}</h2>
+                    {% endif %}
+                    {% if block.settings.button_name != blank %}
+                    <a href="{{ block.settings.button_link }}" class="btn-slider-2 btn-slider-3" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }};">{{ block.settings.button_name }}</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endif %}
+        
+        {% if block.type == 'image7' %}
+        {% if block.settings.image == blank %}
+        <div class="item">
+          <div class="slider--left-item g-content-slider">
+            {% if block.settings.title != blank %}
+            <h4 style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }};">{{ block.settings.title }}</h4>
+            {% endif %}
+            {% if block.settings.text != blank %}
+            <p>{{ block.settings.text }}</p>
+            {% endif %}
+            {% if block.settings.heading != blank %}
+            <h2 style="font-size: {{ block.settings.heading_font_size }}px; color: {{ block.settings.heading_color }};">{{ block.settings.heading }}</h2>
+            {% endif %}
+            <a href="{{ block.settings.button_link }}" class="btn-slider-2" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }};">{{ block.settings.button_name }}</a>
+          </div>
+          <div class="slider--right-item" style="height: 100%; {% if section.settings.height_slider != blank %}min-height: {{ section.settings.height_slider }}px;{% endif %}">
+            {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+            {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+            {% if block.settings.show_left_menu_slider %}
+            <div class="left-menu-collection">
+              <ul>
+                {% if block.settings.link_left_menu_slider != blank %}
+                {% for link in linklists[block.settings.link_left_menu_slider].links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+                {% endif %}
+              </ul>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% else %}
+        <div class="item" data-navipicture="{{ block.settings.image | img_url: '260x160' }}" style="min-height: {{ section.settings.height_slider }}px">
+          <div class="slider--left-item g-content-slider">
+			{% if block.settings.title != blank %}
+            <h4 style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }};">{{ block.settings.title }}</h4>
+            {% endif %}
+            {% if block.settings.text != blank %}
+            <p>{{ block.settings.text }}</p>
+            {% endif %}
+            {% if block.settings.heading != blank %}
+            <h2 style="font-size: {{ block.settings.heading_font_size }}px; color: {{ block.settings.heading_color }};">{{ block.settings.heading }}</h2>
+            {% endif %}
+            <a href="{{ block.settings.button_link }}" class="btn-slider-2" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }};">{{ block.settings.button_name }}</a>
+          </div>
+          <div class="slider--right-item" style="background: url('{{ block.settings.image | img_url: 'master' }}') center center no-repeat;background-size: cover; height: 100%; {% if section.settings.height_slider != blank %}min-height: {{ section.settings.height_slider }}px;{% endif %}">
+            {% if block.settings.show_left_menu_slider %}
+            <div class="left-menu-collection">
+              <ul>
+                {% if block.settings.link_left_menu_slider != blank %}
+                {% for link in linklists[block.settings.link_left_menu_slider].links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+                {% endif %}
+              </ul>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+        {% endif %}
+        
+        {% if block.type == 'image8' %}
+        {% if block.settings.image == blank %}
+        <div class="item">
+          {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+          {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          <div class="content_slideshow content_slideshow-top">
+            <div class="container">
+              <div class="g-content-slider">
+                {% if block.settings.title != blank %}
+                <h5 class="title-border-top title-border-bold" style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }}; letter-spacing: 0.5em; line-height: 1.8; margin: 50px 0 0 0; text-transform: uppercase;">{{ block.settings.title }}</h5>
+                {% endif %}
+                {% if block.settings.heading != blank %}
+                <h2 style="font-size: {{ block.settings.heading_font_size }}px; line-height: 1; color: {{ block.settings.heading_color }}; margin: 250px 0 25px 0;">{{ block.settings.heading }}</h2>
+                {% endif %}
+                {% if block.settings.text != blank %}
+                <p style="font-size: 18px; line-height: 1.6;">{{ block.settings.text }}</p>
+                {% endif %}
+                {% if block.settings.button_name != blank %}
+                <a href="{{ block.settings.button_link }}" class="btn-slider-4" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }}; margin-top: 20px; display: inline-block;">{{ block.settings.button_name }}</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="item" data-navipicture="{{ block.settings.image | img_url: '260x160' }}" style="background: url('{{ block.settings.image | img_url: 'master' }}') center center no-repeat;background-size: cover; min-height: {{ section.settings.height_slider }}px">
+          <div class="content_slideshow content_slideshow-top">
+            <div class="container">
+              <div class="g-content-slider">
+                {% if block.settings.title != blank %}
+                <h5 class="title-border-top title-border-bold" style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }}; letter-spacing: 0.5em; line-height: 1.8; margin: 50px 0 0 0; text-transform: uppercase;">{{ block.settings.title }}</h5>
+                {% endif %}
+                {% if block.settings.heading != blank %}
+                <h2 style="font-size: {{ block.settings.heading_font_size }}px; line-height: 1; color: {{ block.settings.heading_color }}; margin: 250px 0 25px 0;">{{ block.settings.heading }}</h2>
+                {% endif %}
+                {% if block.settings.text != blank %}
+                <p style="font-size: 18px; line-height: 1.6;">{{ block.settings.text }}</p>
+                {% endif %}
+                {% if block.settings.button_name != blank %}
+                <a href="{{ block.settings.button_link }}" class="btn-slider-4" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }}; margin-top: 20px; display: inline-block;">{{ block.settings.button_name }}</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endif %}
+        
+        {% if block.type == 'image9' %}
+        {% if block.settings.image == blank %}
+        <div class="item">
+          {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+          {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          <div class="content_slideshow">
+            <div class="container text-center">
+              <div class="g-content-slider">
+                {% if block.settings.title != blank %}
+                <h5 style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }}; line-height: 1.3; margin: 0; text-transform: uppercase;">{{ block.settings.title }}</h5>
+                {% endif %}
+                {% if block.settings.heading != blank %}
+                <h2 style="font-size: {{ block.settings.heading_font_size }}px; color: {{ block.settings.heading_color }}; margin: 20px 0 35px 0; line-height: 1;">{{ block.settings.heading }}</h2>
+                {% endif %}
+                {% if block.settings.button_name != blank %}
+                <a href="{{ block.settings.button_link }}" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }}; display: inline-block;">{{ block.settings.button_name }}</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="item" data-navipicture="{{ block.settings.image | img_url: '260x160' }}" style="background: url('{{ block.settings.image | img_url: 'master' }}') center center no-repeat;background-size: cover; min-height: {{ section.settings.height_slider }}px">
+          <div class="content_slideshow">
+            <div class="container text-center">
+              <div class="g-content-slider">
+                {% if block.settings.title != blank %}
+                <h5 style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }}; line-height: 1.3; margin: 0; text-transform: uppercase;">{{ block.settings.title }}</h5>
+                {% endif %}
+                {% if block.settings.heading != blank %}
+                <h2 style="font-size: {{ block.settings.heading_font_size }}px; color: {{ block.settings.heading_color }}; margin: 20px 0 35px 0; line-height: 1;">{{ block.settings.heading }}</h2>
+                {% endif %}
+                {% if block.settings.button_name != blank %}
+                <a href="{{ block.settings.button_link }}" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }}; display: inline-block;">{{ block.settings.button_name }}</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endif %}
+        
+        {% if block.type == 'image10' %}
+        {% if block.settings.image == blank %}
+        <div class="item">
+          {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+          {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          <div class="content_slideshow">
+            <div class="container text-center">
+              <div class="g-content-slider">
+                {% if block.settings.title != blank %}
+                <h5 style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }}; line-height: 1.3; margin: 0; text-transform: uppercase; letter-spacing: 0.3em;">{{ block.settings.title }}</h5>
+                {% endif %}
+                {% if block.settings.heading != blank %}
+                <h2 style="font-size: {{ block.settings.heading_font_size }}px; color: {{ block.settings.heading_color }}; margin: 20px 0 35px 0; line-height: 1;">{{ block.settings.heading }}</h2>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% if block.settings.button_name != blank %}
+          <a href="{{ block.settings.button_link }}" class="btn-slider-10" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }};">{{ block.settings.button_name }}</a>
+          {% endif %}
+          {% if block.settings.text_left_center != blank %}
+          <div class="heading-catalog heading-catalog-left" style="font-size: {{ block.settings.text_left_center_font_size }}px; color: {{ block.settings.text_left_center_color }}; line-height: 1;">{{ block.settings.text_left_center }} <i class="fa fa-sort" aria-hidden="true"></i></div>
+          {% endif %}
+        </div>
+        {% else %}
+        <div class="item" data-navipicture="{{ block.settings.image | img_url: '260x160' }}" style="background: url('{{ block.settings.image | img_url: 'master' }}') center center no-repeat;background-size: cover; min-height: {{ section.settings.height_slider }}px">
+          <div class="content_slideshow">
+            <div class="container text-center">
+              <div class="g-content-slider">
+                {% if block.settings.title != blank %}
+                <h5 style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }}; line-height: 1.3; margin: 0; text-transform: uppercase; letter-spacing: 0.3em;">{{ block.settings.title }}</h5>
+                {% endif %}
+                {% if block.settings.heading != blank %}
+                <h2 style="font-size: {{ block.settings.heading_font_size }}px; color: {{ block.settings.heading_color }}; margin: 20px 0 35px 0; line-height: 1;">{{ block.settings.heading }}</h2>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% if block.settings.button_name != blank %}
+          <a href="{{ block.settings.button_link }}" class="btn-slider-10" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }};">{{ block.settings.button_name }}</a>
+          {% endif %}
+          {% if block.settings.text_left_center != blank %}
+          <div class="heading-catalog heading-catalog-left" style="font-size: {{ block.settings.text_left_center_font_size }}px; color: {{ block.settings.text_left_center_color }}; line-height: 1;">{{ block.settings.text_left_center }} <i class="fa fa-sort" aria-hidden="true"></i></div>
+          {% endif %}
+        </div>
+        {% endif %}
+        {% endif %}
+        
+        {% if block.type == 'image11' %}
+        {% if block.settings.image == blank %}
+        <div class="item">
+          {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+          {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          <div class="content_slideshow-11">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12 left-slideshow-11">
+                  {% if block.settings.show_left_menu_slider %}
+                  <div class="left-menu-collection">
+                    {% if block.settings.text_left_menu %}
+                    <h3>{{ block.settings.text_left_menu }}</h3>
+                    {% endif %}
+                    <ul class="clearfix">
+                      {% if block.settings.link_left_menu_slider != blank %}
+                      {% for link in linklists[block.settings.link_left_menu_slider].links %}
+                      <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                      {% endfor %}
+                      {% endif %}
+                    </ul>
+                  </div>
+                  {% endif %}                	
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 right-slideshow-11">
+                  <div class="g-content-slider">
+                    {% if block.settings.title != blank %}
+                    <h5 style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }}; line-height: 1.3; margin: 0; text-transform: uppercase; letter-spacing: 0.3em;">{{ block.settings.title }}</h5>
+                    {% endif %}
+                    {% if block.settings.heading != blank %}
+                    <h2 style="font-size: {{ block.settings.heading_font_size }}px; color: {{ block.settings.heading_color }}; margin: 20px 0 35px 0; line-height: 1;">{{ block.settings.heading }}</h2>
+                    {% endif %}
+                    {% if block.settings.button_name != blank %}
+                    <a href="{{ block.settings.button_link }}" class="btn-slider-4" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }};">{{ block.settings.button_name }}</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="item" data-navipicture="{{ block.settings.image | img_url: '260x160' }}" style="background: url('{{ block.settings.image | img_url: 'master' }}') center center no-repeat;background-size: cover; min-height: {{ section.settings.height_slider }}px">
+          <div class="content_slideshow-11">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12 left-slideshow-11">
+                  {% if block.settings.show_left_menu_slider %}
+                  <div class="left-menu-collection">
+                    {% if block.settings.text_left_menu %}
+                    <h3>{{ block.settings.text_left_menu }}</h3>
+                    {% endif %}
+                    <ul class="clearfix">
+                      {% if block.settings.link_left_menu_slider != blank %}
+                      {% for link in linklists[block.settings.link_left_menu_slider].links %}
+                      <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                      {% endfor %}
+                      {% endif %}
+                    </ul>
+                  </div>
+                  {% endif %}                	
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 right-slideshow-11">
+                  <div class="g-content-slider">
+                    {% if block.settings.title != blank %}
+                    <h5 style="font-size: {{ block.settings.title_font_size }}px; color: {{ block.settings.title_color }}; line-height: 1.3; margin: 0; text-transform: uppercase; letter-spacing: 0.3em;">{{ block.settings.title }}</h5>
+                    {% endif %}
+                    {% if block.settings.heading != blank %}
+                    <h2 style="font-size: {{ block.settings.heading_font_size }}px; color: {{ block.settings.heading_color }}; margin: 20px 0 35px 0; line-height: 1;">{{ block.settings.heading }}</h2>
+                    {% endif %}
+                    {% if block.settings.button_name != blank %}
+                    <a href="{{ block.settings.button_link }}" class="btn-slider-4" style="font-size: {{ block.settings.button_font_size }}px; color: {{ block.settings.button_color }};">{{ block.settings.button_name }}</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endif %}
+
+        {% endfor %}
+        {% endif %}
+        
+      </div>
+      {% if section.settings.use_nav_image %}
+      {% if section.blocks.size > 1 %}
+      <div class="navPrev navImage">
+        <div class="box-nav-image">
+          <div class="text-nav-image">
+            <span {% if section.settings.navtext_color != blank %}style="color: {{ section.settings.navtext_color }};"{% endif %}>Prev top</span>
+            <h5 {% if section.settings.navtext_color != blank %}style="color: {{ section.settings.navtext_color }};"{% endif %}></h5>
+          </div>
+          <div class="image"><img src="{{ 'img-transparency-slide-small.png' | asset_url  }}" alt="navPrev"></div>
+        </div>
+        <div class="icon-nav"><i class="dl-icon-left"></i></div>
+      </div>
+      <div class="navNext navImage">
+        <div class="box-nav-image">
+          <div class="text-nav-image">
+            <span {% if section.settings.navtext_color != blank %}style="color: {{ section.settings.navtext_color }};"{% endif %}>Next up</span>
+            <h5 {% if section.settings.navtext_color != blank %}style="color: {{ section.settings.navtext_color }};"{% endif %}></h5>
+          </div>
+          <div class="image"><img src="{{ 'img-transparency-slide-small.png' | asset_url  }}" alt="navNext"></div>
+        </div>
+        <div class="icon-nav"><i class="dl-icon-right"></i></div>
+      </div>
+      {% endif %}
+      {% endif %}
+      {% if section.settings.use_get_in_touch %}
+      <div class="get-in-touch-slider">
+        <a href="mailto:{{ section.settings.mail_get_in_touch }}"><i class="fa fa-envelope" aria-hidden="true"></i> {{ section.settings.text_get_in_touch }}</a>
+      </div>
+      {% endif %}
+      {% if section.settings.use_social_slider %}
+      <div class="social-slider social-media-link style-default {{ social_class }}">
+        {% if section.settings.text_label != blank %}
+        <label>{{ section.settings.text_label }}</label>
+        {% endif %}
+        {% if settings.social_facebook_link != blank %}
+        <a href="{{ settings.social_facebook_link | escape }}" class="facebook" title="Facebook" target="_blank" rel="nofollow"><i class="fa fa-facebook"></i></a>
+        {% endif %}
+        {% if settings.social_twitter_link != blank %}
+        <a href="{{ settings.social_twitter_link | escape }}" class="twitter" title="Twitter" target="_blank" rel="nofollow"><i class="fa fa-twitter"></i></a>
+        {% endif %}
+        {% if settings.social_pinterest_link != blank %}
+        <a href="{{ settings.social_pinterest_link | escape }}" class="pinterest" title="Pinterest" target="_blank" rel="nofollow"><i class="fa fa-pinterest-p"></i></a>
+        {% endif %}
+        {% if settings.social_instagram_link != blank %}
+        <a href="{{ settings.social_instagram_link | escape }}" class="instagram" title="Instagram" target="_blank" rel="nofollow"><i class="fa fa-instagram"></i></a>
+        {% endif %}
+        {% if settings.social_behance_link != blank %}
+        <a href="{{ settings.social_behance_link | escape }}" class="behance" title="Behance" target="_blank" rel="nofollow"><i class="fa fa-behance"></i></a>
+        {% endif %}
+        {% if settings.social_tumblr_link != blank %}
+        <a href="{{ settings.social_tumblr_link | escape }}" class="tumblr" title="Tumblr" target="_blank" rel="nofollow"><i class="fa fa-tumblr"></i></a>
+        {% endif %}
+        {% if settings.social_snapchat_link != blank %}
+        <a href="{{ settings.social_snapchat_link | escape }}" class="snapchat" title="Snapchat" target="_blank" rel="nofollow"><i class="fa fa-snapchat"></i></a>
+        {% endif %}
+        {% if settings.social_youtube_link != blank %}
+        <a href="{{ settings.social_youtube_link | escape }}" class="youtube" title="Youtube" target="_blank" rel="nofollow"><i class="fa fa-youtube"></i></a>
+        {% endif %}
+        {% if settings.social_vimeo_link != blank %}
+        <a href="{{ settings.social_vimeo_link | escape }}" class="vimeo" title="Vimeo" target="_blank" rel="nofollow"><i class="fa fa-vimeo"></i></a>
+        {% endif %}          	
+      </div>
+      {% endif %}
+
+      {% if section.settings.use_owl_thumbs %}
+      <div class="owl-thumbs {{ thumbs_class }}" data-slider-id="{{ section.id }}">
+        {% for block in section.blocks %}
+        <button class="owl-thumb-item" {% if block.settings.image != blank %}style="background-image: url({{ block.settings.image | img_url: 'medium' }});"{% else %}style="padding-bottom: 0;"{% endif %}>
+          {% if block.settings.image == blank %}
+          {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+          {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+        </button>
+        {% endfor %}
+      </div>
+      {% endif %}
+      
+    </div>
+    {% if section.settings.show_right_list_catalog %}
+    <div class="list-catalog">
+      {% if section.settings.right_title_catalog != blank %}
+      	<h3>{{ section.settings.right_title_catalog }}</h3>
+      {% endif %}
+      {% if section.settings.html_catalog != blank %}
+      	{{ section.settings.html_catalog }}
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+<style>
+  {% if section.settings.use_full_screen %}
+  .g-slideshow .item svg {
+    min-height: 100%;
+  } 
+  {% else %}
+  .g-slideshow .item svg {
+    min-height: {{ section.settings.height_slider }}px;
+  }
+  {% endif %}
+  
+  {% if section.settings.social_color != blank %}
+  .social-slider a,
+  .social-slider label {
+    color: {{ section.settings.social_color }};
+  }
+  {% endif %}
+  
+</style>
+{% schema %}
+  {
+    "name": "Slideshow",
+    "class": "globo-slideshow",
+    "max_blocks": 6,
+    "settings": [
+      {
+        "type": "header",
+        "content": "Slider"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_full_screen",
+        "label": "Use full screen slideshow?",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "use_width",
+        "label": "Slideshow width",
+        "options": [
+          { "value": "1", "label": "Use full width" },
+          { "value": "2", "label": "Use padding" },
+          { "value": "3", "label": "Use container" }
+        ],
+        "default": "2"
+      },
+      {
+        "type": "text",
+        "id": "height_slider",
+        "label": "Slideshow height",
+		"default": "860"
+      },
+      {
+        "type": "text",
+        "id": "margin",
+        "label": "Margin: (top-right-bottom-left)",
+        "info": "Ex: 10px 0 30px 0"
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Auto-rotate slides",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "use_dots_slideshow",
+        "label": "Use dots?",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "use_dots_style",
+        "label": "Use dots style position",
+        "options": [
+          { "value": "1", "label": "Dots style position 1" },
+          { "value": "2", "label": "Dots style position 2" },
+	      { "value": "3", "label": "Dots style position 3" },
+		  { "value": "4", "label": "Dots style position 4" },
+		  { "value": "5", "label": "Dots style position 5" }
+        ],
+        "default": "1"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_nav_image",
+        "label": "Use nav image?",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "nav_image_style_position",
+        "label": "Use nav image style position",
+        "options": [
+          { "value": "1", "label": "Nav image style position 1" },
+          { "value": "2", "label": "Nav image style position 2" },
+		  { "value": "3", "label": "Nav image style position 3" }
+        ],
+        "default": "1"
+      },
+      {
+        "type": "color",
+        "id": "navtext_color",
+        "label": "Nav text color"
+      },		
+      {
+        "type": "checkbox",
+        "id": "use_nav_slideshow",
+        "label": "Use nav default?",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "nav_style",
+        "label": "Use nav style position",
+        "options": [
+          { "value": "1", "label": "Nav style position 1" },
+          { "value": "2", "label": "Nav style position 2" },
+          { "value": "3", "label": "Nav style position 3" },
+		  { "value": "4", "label": "Nav style position 4" },
+		  { "value": "5", "label": "Nav style position 5" }
+        ],
+        "default": "1"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_owl_thumbs",
+        "label": "Use owl thumbs?",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "thumbs_style_position",
+        "label": "Use thumb style position",
+        "options": [
+          { "value": "1", "label": "Thumb style position 1" },
+          { "value": "2", "label": "Thumb style position 2" },
+          { "value": "3", "label": "Thumb style position 3" },
+          { "value": "4", "label": "Thumb style position 4" },
+          { "value": "5", "label": "Thumb style position 5" }
+        ],
+        "default": "1"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_number_total",
+        "label": "Use number total?",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "number_total_position",
+        "label": "Use number total position",
+        "options": [
+          { "value": "1", "label": "Position 1" },
+          { "value": "2", "label": "Position 2" },
+          { "value": "3", "label": "Position 3" },
+		  { "value": "4", "label": "Position 4" },
+		  { "value": "5", "label": "Position 5" }
+        ],
+        "default": "1"
+      },
+      {
+        "type": "select",
+        "id": "transition",
+        "label": "Change transition",
+        "options": [
+          { "value": "slide", "label": "Slide" },
+          { "value": "fade", "label": "Fade" }
+        ],
+        "default": "slide"
+      },
+      {
+        "type": "select",
+        "id": "autoplay_speed",
+        "label": "Change slides every",
+        "options": [
+          { "value": "5000", "label": "5 seconds" },
+          { "value": "6000", "label": "6 seconds" },
+          { "value": "7000", "label": "7 seconds" },
+          { "value": "8000", "label": "8 seconds" },
+          { "value": "9000", "label": "9 seconds" },
+          { "value": "10000", "label": "10 seconds" }
+        ],
+        "default": "5000"
+      },
+      {
+        "type": "header",
+        "content": "Social"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_social_slider",
+        "label": "Use social slider",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "social_color",
+        "label": "Social color"
+      },
+      {
+        "type": "select",
+        "id": "social_position",
+        "label": "Social position",
+        "options": [
+          { "value": "1", "label": "Social position 1" },
+          { "value": "2", "label": "Social position 2" },
+          { "value": "3", "label": "Social position 3" },
+		  { "value": "4", "label": "Social position 4" }
+        ],
+        "default": "1"
+      },
+      {
+        "type": "text",
+        "id": "text_label",
+        "label": "Social label",
+        "default": "Follow us:"
+      },
+      {
+        "type": "header",
+        "content": "Get in touch"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_get_in_touch",
+        "label": "Use get in touch",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "mail_get_in_touch",
+        "label": "Mail",
+        "default": "contact@globosoftware.net"
+      },
+      {
+        "type": "text",
+        "id": "text_get_in_touch",
+        "label": "Text",
+        "default": "Get in touch"
+      },
+      {
+        "type": "header",
+        "content": "Catalog"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_right_list_catalog",
+        "label": "Use right list catalog?",
+        "default": false
+      },	
+      {
+        "type": "text",
+        "id": "right_title_catalog",
+        "label": "Title",
+        "default": "Catalog"
+      },
+      {
+        "type": "html",
+        "id": "html_catalog",
+        "label": "Html content"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Slide Main 1",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "TRENDING SOFA <br>COLLECTION"
+          },
+          {
+            "type": "text",
+            "id": "title_font_size",
+            "label": "Title font size",
+            "default": "14"
+          },
+          {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title color",
+            "default": "#000000"
+          },
+          {
+            "type": "text",
+            "id": "topheading",
+            "label": "Top heading",
+            "default": "NEW COLLECTION 2018"
+          },
+          {
+            "type": "text",
+            "id": "topheading_font_size",
+            "label": "Top heading font size",
+            "default": "14"
+          },
+          {
+            "type": "color",
+            "id": "topheading_color",
+            "label": "Top heading color",
+            "default": "#555555"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "<span>H4<\/span> SOFA"
+          },
+          {
+            "type": "text",
+            "id": "heading_font_size",
+            "label": "Heading font size",
+            "default": "100"
+          },
+          {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading color",
+            "default": "#000000"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+            "type": "text",
+            "id": "button_name",
+            "label": "Button name",
+			"default": "SHOP NOW"
+          },
+          {
+            "type": "text",
+            "id": "button_font_size",
+            "label": "Button font size",
+            "default": "13"
+          },
+          {
+            "type": "color",
+            "id": "button_color",
+            "label": "Button color",
+            "default": "#606da6"
+          },
+          {
+            "type": "text",
+            "id": "text_1",
+            "label": "Text 1",
+			"default": "unique design<br>Chair trending"
+          },
+          {
+            "type": "color",
+            "id": "text_1_color",
+            "label": "Text 1 color",
+            "default": "#000000"
+          },
+          {
+            "type": "text",
+            "id": "text_2",
+            "label": "Text 2",
+			"default": "the best material <br>for the product"
+          },
+          {
+            "type": "color",
+            "id": "text_2_color",
+            "label": "Text 2 color",
+            "default": "#000000"
+          },
+          {
+            "type": "text",
+            "id": "text_right_center",
+            "label": "Text right center",
+			"default": "Catalog"
+          },
+          {
+            "type": "text",
+            "id": "text_right_center_font_size",
+            "label": "Text right font size",
+            "default": "30"
+          },
+          {
+            "type": "color",
+            "id": "text_right_center_color",
+            "label": "Text right center color",
+            "default": "#000000"
+          }
+        ]
+      },
+      {
+        "type": "image2",
+        "name": "Slide Main 2",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "TRENDING"
+          },
+          {
+            "type": "text",
+            "id": "title_font_size",
+            "label": "Title font size",
+            "default": "14"
+          },
+          {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title color",
+            "default": "#000000"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+			"default": "Chair <span>Collection<\/span>"
+          },
+          {
+            "type": "text",
+            "id": "heading_font_size",
+            "label": "Heading font size",
+            "default": "60"
+          },
+          {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading color",
+            "default": "#000000"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+            "type": "text",
+            "id": "button_name",
+            "label": "Button name",
+			"default": "SHOP NOW"
+          },
+          {
+            "type": "text",
+            "id": "button_font_size",
+            "label": "Button font size",
+            "default": "13"
+          },
+          {
+            "type": "color",
+            "id": "button_color",
+            "label": "Button color",
+            "default": "#F26C4F"
+          },
+          {
+            "type": "text",
+            "id": "text_1",
+            "label": "Text 1",
+			"default": "unique design<br>Chair trending"
+          },
+          {
+            "type": "color",
+            "id": "text_1_color",
+            "label": "Text 1 color",
+            "default": "#000000"
+          },
+          {
+            "type": "text",
+            "id": "text_2",
+            "label": "Text 2",
+			"default": "the best material <br>for the product"
+          },
+          {
+            "type": "color",
+            "id": "text_2_color",
+            "label": "Text 2 color",
+            "default": "#000000"
+          },
+          {
+            "type": "text",
+            "id": "text_left_center",
+            "label": "Text left center",
+			"default": "Catalog"
+          },
+          {
+            "type": "text",
+            "id": "text_left_center_font_size",
+            "label": "Text left font size",
+            "default": "30"
+          },
+          {
+            "type": "color",
+            "id": "text_left_center_color",
+            "label": "Text left center color",
+            "default": "#000000"
+          }
+        ]
+      },
+      {
+        "type": "image3",
+        "name": "Slide Main 3",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+			"default": "<span>Amazing Lamp<\/span> Collection"
+          },
+          {
+            "type": "text",
+            "id": "heading_font_size",
+            "label": "Heading font size",
+            "default": "72"
+          },
+          {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading color",
+            "default": "#000000"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+            "type": "text",
+            "id": "button_name",
+            "label": "Button name",
+			"default": "SHOP NOW"
+          },
+          {
+            "type": "text",
+            "id": "button_font_size",
+            "label": "Button font size",
+            "default": "11"
+          },
+          {
+            "type": "color",
+            "id": "button_color",
+            "label": "Button color",
+            "default": "#606da6"
+          },
+          {
+            "type": "text",
+            "id": "text_1",
+            "label": "Text 1",
+			"default": "<strong>.01<\/strong>unique design<br>Chair trending"
+          },
+          {
+            "type": "color",
+            "id": "text_1_color",
+            "label": "Text 1 color",
+            "default": "#000000"
+          },
+          {
+            "type": "text",
+            "id": "text_2",
+            "label": "Text 2",
+			"default": "<strong>.02<\/strong>the best material <br>for the product"
+          },
+          {
+            "type": "color",
+            "id": "text_2_color",
+            "label": "Text 2 color",
+            "default": "#000000"
+          },
+          {
+            "type": "text",
+            "id": "text_right_center",
+            "label": "Text right center",
+			"default": "Catalog"
+          },
+          {
+            "type": "text",
+            "id": "text_right_center_font_size",
+            "label": "Text right font size",
+            "default": "30"
+          },
+          {
+            "type": "color",
+            "id": "text_right_center_color",
+            "label": "Text right center color",
+            "default": "#000000"
+          }
+        ]
+      },
+      {
+        "type": "image4",
+        "name": "Slide Main 4",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "TRENDING<br>COLLECTION<br>2018"
+          },
+          {
+            "type": "text",
+            "id": "title_font_size",
+            "label": "Title font size",
+            "default": "14"
+          },
+          {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title color",
+            "default": "#000000"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "X <span>Chair<\/span>"
+          },
+          {
+            "type": "text",
+            "id": "heading_font_size",
+            "label": "Heading font size",
+            "default": "120"
+          },
+          {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading color",
+            "default": "#000000"
+          },
+          {
+            "type": "text",
+            "id": "text_1",
+            "label": "Text 1",
+			"default": "<strong>.01<\/strong>unique design<br>Chair trending"
+          },
+          {
+            "type": "color",
+            "id": "text_1_color",
+            "label": "Text 1 color",
+            "default": "#a1a1a1"
+          },
+          {
+            "type": "text",
+            "id": "text_2",
+            "label": "Text 2",
+			"default": "<strong>.02<\/strong>the best material <br>for the product"
+          },
+          {
+            "type": "color",
+            "id": "text_2_color",
+            "label": "Text 2 color",
+            "default": "#a1a1a1"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+            "type": "text",
+            "id": "button_name",
+            "label": "Button name",
+			"default": "SHOP NOW"
+          },
+          {
+            "type": "text",
+            "id": "button_font_size",
+            "label": "Button font size",
+            "default": "13"
+          },
+          {
+            "type": "color",
+            "id": "button_color",
+            "label": "Button color",
+            "default": "#606da6"
+          },
+          {
+            "type": "text",
+            "id": "text_left_center",
+            "label": "Text left bottom",
+			"default": "Catalog"
+          },
+          {
+            "type": "text",
+            "id": "text_left_center_font_size",
+            "label": "Text left bottom font size",
+            "default": "18"
+          },
+          {
+            "type": "color",
+            "id": "text_right_center_color",
+            "label": "Text left bottom color",
+            "default": "#000000"
+          }
+        ]
+      },
+      {
+        "type": "image5",
+        "name": "Slide Main 5",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+			"default": "NEW COLLECTION 2018"
+          },
+          {
+            "type": "text",
+            "id": "title_font_size",
+            "label": "Title font size",
+            "default": "14"
+          },
+          {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title color",
+            "default": "#000000"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+			"default": "<span>Wood Chair<\/span> Decor"
+          },
+          {
+            "type": "text",
+            "id": "heading_font_size",
+            "label": "Heading font size",
+            "default": "72"
+          },
+          {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading color",
+            "default": "#000000"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+            "type": "text",
+            "id": "button_name",
+            "label": "Button name",
+			"default": "SHOP NOW"
+          },
+          {
+            "type": "text",
+            "id": "button_font_size",
+            "label": "Button font size",
+            "default": "11"
+          },
+          {
+            "type": "color",
+            "id": "button_color",
+            "label": "Button color",
+            "default": "#606da6"
+          },
+          {
+            "type": "color",
+            "id": "button_bg_color",
+            "label": "Button background color",
+            "default": "#e1e1e1"
+          }
+        ]
+      },
+      {
+        "type": "image6",
+        "name": "Slide Main 6",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+			"default": "Wood Table"
+          },
+          {
+            "type": "text",
+            "id": "title_font_size",
+            "label": "Title font size",
+            "default": "140"
+          },
+          {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title color",
+            "default": "#ffffff"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+            "type": "text",
+            "id": "button_name",
+            "label": "Button name",
+			"default": "SHOP NOW"
+          },
+          {
+            "type": "text",
+            "id": "button_font_size",
+            "label": "Button font size",
+            "default": "14"
+          },
+          {
+            "type": "color",
+            "id": "button_color",
+            "label": "Button color",
+            "default": "#ffffff"
+          }
+        ]
+      },
+      {
+        "type": "image7",
+        "name": "Slide Main 7",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "show_left_menu_slider",
+            "label": "Show left menu?",
+            "default": false
+          },
+          {
+            "type": "link_list",
+            "id": "link_left_menu_slider",
+            "label": "Link left menu"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+			"default": "Trending"
+          },
+          {
+            "type": "text",
+            "id": "title_font_size",
+            "label": "Title font size",
+            "default": "18"
+          },
+          {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title color",
+            "default": "#000000"
+          },
+          {
+            "type": "textarea",
+            "id": "text",
+            "label": "Text",
+			"default": "Class aptent taciti sociosqu ad litora torquent per conubia nostra."
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+			"default": "Blue Lamps<br><span>Decor</span>"
+          },
+          {
+            "type": "text",
+            "id": "heading_font_size",
+            "label": "Heading font size",
+            "default": "72"
+          },
+          {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading color",
+            "default": "#000000"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+            "type": "text",
+            "id": "button_name",
+            "label": "Button name",
+			"default": "SHOP NOW"
+          },
+          {
+            "type": "text",
+            "id": "button_font_size",
+            "label": "Button font size",
+            "default": "11"
+          },
+          {
+            "type": "color",
+            "id": "button_color",
+            "label": "Button color",
+            "default": "#000000"
+          }
+        ]
+      },
+      {
+        "type": "image8",
+        "name": "Slide Main 8",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "TRENDING<br>COLLECTION<br>2018"
+          },
+          {
+            "type": "text",
+            "id": "title_font_size",
+            "label": "Title font size",
+            "default": "14"
+          },
+          {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title color",
+            "default": "#000000"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+			"default": "Hebes Chair<br><span>Decor<\/span>"
+          },
+          {
+            "type": "text",
+            "id": "heading_font_size",
+            "label": "Heading font size",
+            "default": "72"
+          },
+          {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading color",
+            "default": "#000000"
+          },
+          {
+            "type": "textarea",
+            "id": "text",
+            "label": "Text",
+			"default": "Sed id interdum urna. Nam ac elit a ante commodo tristique. <br>Duis lacus urna, condimentum nisi."
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+            "type": "text",
+            "id": "button_name",
+            "label": "Button name",
+			"default": "SHOP NOW"
+          },
+          {
+            "type": "text",
+            "id": "button_font_size",
+            "label": "Button font size",
+            "default": "14"
+          },
+          {
+            "type": "color",
+            "id": "button_color",
+            "label": "Button color",
+            "default": "#000000"
+          }
+        ]
+      },
+      {
+        "type": "image9",
+        "name": "Slide Main 9",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "NEW COLLECTION 2018"
+          },
+          {
+            "type": "text",
+            "id": "title_font_size",
+            "label": "Title font size",
+            "default": "14"
+          },
+          {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title color",
+            "default": "#606da6"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+		    "default": "Wood Table<br><span>Hebes Decor<\/span>"
+          },
+          {
+            "type": "text",
+            "id": "heading_font_size",
+            "label": "Heading font size",
+            "default": "60"
+          },
+          {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading color",
+            "default": "#000000"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+            "type": "text",
+            "id": "button_name",
+            "label": "Button name",
+			"default": "SHOP NOW"
+          },
+          {
+            "type": "text",
+            "id": "button_font_size",
+            "label": "Button font size",
+            "default": "14"
+          },
+          {
+            "type": "color",
+            "id": "button_color",
+            "label": "Button color",
+            "default": "#000000"
+          }
+        ]
+      },
+      {
+        "type": "image10",
+        "name": "Slide Main 10",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "NEW DESIGN 2018"
+          },
+          {
+            "type": "text",
+            "id": "title_font_size",
+            "label": "Title font size",
+            "default": "12"
+          },
+          {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title color",
+            "default": "#ffffff"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading", 
+		    "default": "Wood <span>Lamp<\/span><br>Hebes Decor 2018"
+          },
+          {
+            "type": "text",
+            "id": "heading_font_size",
+            "label": "Heading font size",
+            "default": "72"
+          },
+          {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading color",
+            "default": "#ffffff"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+            "type": "text",
+            "id": "button_name",
+            "label": "Button name",
+			"default": "S<br>H<br>O<br>P"
+          },
+          {
+            "type": "text",
+            "id": "button_font_size",
+            "label": "Button font size",
+            "default": "11"
+          },
+          {
+            "type": "color",
+            "id": "button_color",
+            "label": "Button color",
+            "default": "#ffffff"
+          },
+          {
+            "type": "text",
+            "id": "text_left_center",
+            "label": "Text left center",
+			"default": "Catalog"
+          },
+          {
+            "type": "text",
+            "id": "text_left_center_font_size",
+            "label": "Text left font size",
+            "default": "18"
+          },
+          {
+            "type": "color",
+            "id": "text_left_center_color",
+            "label": "Text left center color",
+            "default": "#ffffff"
+          }
+        ]
+      },
+      {
+        "type": "image11",
+        "name": "Slide Main 11",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "show_left_menu_slider",
+            "label": "Show left menu?",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "text_left_menu",
+            "label": "Text",
+			"default": "Catalog"
+          },			
+          {
+            "type": "link_list",
+            "id": "link_left_menu_slider",
+            "label": "Link left menu"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "title_font_size",
+            "label": "Title font size",
+            "default": "12"
+          },
+          {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title color",
+            "default": "#000000"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading", 
+			"default": "<span>Chair<\/span><br>Collection"
+          },
+          {
+            "type": "text",
+            "id": "heading_font_size",
+            "label": "Heading font size",
+            "default": "100"
+          },
+          {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading color",
+            "default": "#000000"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+            "type": "text",
+            "id": "button_name",
+            "label": "Button name",
+			"default": "Shop Now"
+          },
+          {
+            "type": "text",
+            "id": "button_font_size",
+            "label": "Button font size",
+            "default": "13"
+          },
+          {
+            "type": "color",
+            "id": "button_color",
+            "label": "Button color",
+            "default": "#000000"
+          }
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "Slideshow",
+      "category": "Image",
+      "settings": {
+        "autoplay": true,
+        "autoplay_speed": "5000"
+      },
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }]
+  }
+{% endschema %}
